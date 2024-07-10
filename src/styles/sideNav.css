@@ -1,0 +1,27 @@
+.nav-style{
+    
+    font-size: 15.6px;
+    color: #475661;
+    /* width: 100%; */
+    font-weight: 400;
+    margin-left: 38%;
+    margin-bottom: 10px;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.nav-style:first-child{
+    margin-top: 35px;
+    margin-left: 35%;
+}
+.active-nav-style{
+    color: #008EEF;
+    background-color: #F6FCFF;
+    font-size: 15.6px;
+    font-weight: 700;
+    margin-left: 38%;
+    /* width: 100%; */
+    padding: 15px 20px;
+    border-radius: 20px;
+}
+.active-nav-style:first-child{
+    margin-top: 35px;
+}

@@ -7,6 +7,7 @@ import Chevron from "@/assets/icons/chevron";
 import Hamburger from "@/assets/icons/hamburger";
 import {usePathname } from 'next/navigation';
 import styles from "../styles/header.module.css"
+import SmallScreenHeader from "./smallScreenHeader";
 
 interface MenuItem{
     name: string;
@@ -33,11 +34,12 @@ const Header: React.FC = () =>{
         }
     ]
     return(
-        <>
+        <>  
             <nav className="w-100 border bg-white hidden md:block lg:block">
                 <div className="w-100 border px-6 py-3 flex items-center justify-between">
                 <div className="logo mx-10 space-x-4">
                     <EnumLogo/>
+                    
                 </div>
                 <div className="navigation">
                     <ul className="flex space-x-4">

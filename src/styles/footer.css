@@ -1,0 +1,22 @@
+.footer-link-inactive{
+    color: rgb(88, 88, 88);
+    font-size: 12px;
+    font-weight: 500;
+}
+.active-footer-link {
+    color:  #008EEF;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.footer-icon{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    /* color: rgb(88, 88, 88); */
+    filter: grayscale(100%) brightness(50%);
+}
+
+.footer-icon-active{
+    filter: invert(29%) sepia(94%) saturate(749%) hue-rotate(165deg) brightness(93%) contrast(100%);
+}

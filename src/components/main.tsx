@@ -16,7 +16,7 @@ const MainSection: React.FC<MainSectionProps> = ({children}) =>{
 
     return(
         <>
-        <div className = ' md:flex flex-row'>
+        <div className = ' md:flex flex-row flex-grow'>
         <SideNav/>
         <SideBarMainContent/>
       </div>

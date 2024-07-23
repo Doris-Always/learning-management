@@ -7,7 +7,7 @@ import { setButtonDisplay } from '@/ReduxStore/slice/SideNavSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-const SideBarMainContent = ()=>{    
+const SideBarMainContent:React.FC = ()=>{    
     const activeItem = useSelector((state: RootState) => state.sideNavButton.buttonDisplay);
 
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const SideBarMainContent = ()=>{
                 activeItem === 'programs'? <Programs/> :
                 activeItem === 'instructors'? <Instructors/>:
                 activeItem === 'learners'? <Learners/>:
-                <div className='hidden md:block'>Nothing selected yet</div>
+                <div className='hidden md:block'><Cohorts/> </div>
 
             }
             </>

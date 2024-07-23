@@ -1,5 +1,6 @@
 import { setButtonDisplay } from '@/ReduxStore/slice/SideNavSlice';
 import { RootState, useAppSelector} from '@/ReduxStore/Store';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import "../styles/sideNav.css"
 // import { useDispatch, useSelector } from 'react-redux';
@@ -30,13 +31,19 @@ const SideNav: React.FC = () => {
     const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const activeItem = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
-
+   
     const navItems = [
         { name: 'Cohorts', icon: '/users.png' },
         { name: 'Programs', icon: '/book-open.png' },
         { name: 'Instructors', icon: '/briefcase.png' },
         { name: 'Learners', icon: '/user.png' },
     ];
+    const[display, setDisplay] = useState(navItems[0])
+    useEffect(()=>{
+        if(!activeItem){
+            dispatch(setButtonDisplay('cohorts'))
+        }
+    },[dispatch, activeItem])
 
     return (
         <nav className="w-72 border-r bg-white flex gap-8 hidden md:block lg:block">
@@ -49,11 +56,8 @@ const SideNav: React.FC = () => {
                         active={activeItem === item.name.toLowerCase()
                         }
 
-                        onClick={()=> {
-                            dispatch(setButtonDisplay(item.name.toLowerCase()))
-                        }
-                        }
-                        // onClick={() => dispatch(setButtonDisplay(item.name.toLowerCase()))}
+                        onClick={()=> {dispatch(setButtonDisplay(item.name.toLowerCase()))}}
+                      
                     />
                 ))}
             </ul>

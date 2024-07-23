@@ -43,3 +43,18 @@
     height: 76px;
     border: 2px solid red;
 }
+
+/* .footer-link-active{
+    color: #008EEF;
+} */
+.footer-link-inactive{
+    color: rgb(88, 88, 88);
+    font-size: 12px;
+    font-weight: 300;
+}
+.footer-link-active:hover {
+    color:  #008EEF;
+}
+.active-footer{
+    color: #008EEF;
+}

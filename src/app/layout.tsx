@@ -8,6 +8,8 @@ import Hero from "@/components/heroSection"
 import { Provider } from "react-redux";
 import {store} from '../ReduxStore/Store'
 import MainSection from "@/components/main";
+import SmallScreenHeader from "@/components/smallScreenHeader";
+import FooterSmallScreen from "@/components/footerSmallScreen";
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -27,8 +29,10 @@ export default function RootLayout({
         
         <Provider store={store}>
         <Header/>
+        <SmallScreenHeader/>
         <Hero/>
         <MainSection>{children}</MainSection>
+        <FooterSmallScreen/>
           {/* {children} */}
           </Provider>
       

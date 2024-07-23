@@ -7,7 +7,7 @@ export default function Home() {
     <>
      
       <main className="flex min-h-screen ">
-        <div className=""></div>
+        {/* <div className=""></div> */}
       <h1 className="">Home</h1>
       
       

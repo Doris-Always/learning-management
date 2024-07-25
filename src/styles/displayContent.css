@@ -8,3 +8,7 @@
 .empty-message{
     color: #475661;
 }
+.cancel-btn{
+    border: 2px solid #008EEF;
+    color: #008EEF;
+}

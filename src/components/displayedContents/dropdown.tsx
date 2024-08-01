@@ -20,21 +20,29 @@ const CohortDropdown:React.FC = () =>{
       ];
     
     const dispatch = useDispatch();
-    const buttonDisplay = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
+    // const buttonDisplay = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
+    const activeItem = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(items[0].name);
+    const [selectedItem, setSelectedItem] = useState<DropdownItem>(items[0]);
     useEffect(()=>{
-      console.log("use effect is working 1")
-        if(!buttonDisplay){
-            dispatch(setButtonDisplay(items[0].name && items[0].icon))
+      // console.log("use effect is working 1")
+        if(!activeItem){
+            dispatch(setButtonDisplay(items[0].name.toLowerCase()))
 
-        }
-      },[dispatch,buttonDisplay,items])
+        } else {
+          const currentItem = items.find(item => item.name.toLowerCase() === activeItem);
+          if (currentItem) {
+            setSelectedItem(currentItem);
+          }}
+      },[dispatch,activeItem,items])
 
       const handleSelectItem = (item: DropdownItem) => {
-        console.log("handle select worked now 2")
-        setSelectedItem(item.name)
-        setIsOpen(false)
+        setSelectedItem(item);
+        dispatch(setButtonDisplay(item.name.toLowerCase()));
+        setIsOpen(false);
+        // console.log("handle select worked now 2")
+        // setSelectedItem(item.name)
+        // setIsOpen(false)
       };
 
     return(
@@ -45,15 +53,17 @@ const CohortDropdown:React.FC = () =>{
         onClick={() => setIsOpen(!isOpen)} className="flex items-center justify-between p-2 border bg-white w-full rounded-md shadow-sm ring-1 ring-inset mt-2">
         <span className="flex items-center">
           <>
-          <img src={items.find(item => item.name === selectedItem)?.icon }  alt="" className="w-6 h-6 mr-2" />
-          {selectedItem}
+          <img
+            src={selectedItem.icon}
+            // src={items.find(item => item.name.toLowerCase() === activeItem)?.icon}
+            alt=""
+            className="w-6 h-6 mr-2"
+          />
+              {selectedItem.name}
+          {/* {items.find(item => item.name.toLowerCase() === activeItem)?.name} */}
           </>
          
         </span>
-     
-
-       
-           {/* {items.find(item => item.name === selectedItem)?.icon} */}
         <span>
             <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"      aria-hidden="true">
             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -61,16 +71,13 @@ const CohortDropdown:React.FC = () =>{
         </span>
       </button>
       {isOpen && (
-        <ul className="absolute left-0 mt-2 w-full bg-white border px-4">
+        <ul className="absolute left-0 mt-2 w-full bg-white border px-3">
           {items.map((item) => (
             <li 
               key={item.name}
               className="flex items-center p-2 cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelectItem(item)}
-              // onClick={() => {
-              //   dispatch(setButtonDisplay(item.name));
-              //   setIsOpen(false);
-              // }}
+             
             >
               <img src={item.icon} alt={`${item.name} icon`} className="w-6 h-6 mr-2" />
               <p>{item.name}</p>

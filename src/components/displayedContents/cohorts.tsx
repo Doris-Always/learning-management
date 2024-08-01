@@ -37,7 +37,7 @@ const Cohorts = () =>{
          <div className="flex flex-col ">
             <h2 className="hidden md:block font-semibold text-lg m-10">Cohorts</h2>
             
-            <CohortDropdown/>
+            {/* <CohortDropdown/> */}
             <div className="empty-contents p-8 flex flex-col justify-center items-center lg:mx-60">
                 {/* if cohort has not been created before 
                       then if inlineForm is not showing for small screen,

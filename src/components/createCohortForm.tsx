@@ -10,7 +10,7 @@ const Form:React.FC = () =>{
     return(
         <>
    
-      <div className="bg-white md:hidden sm:block">
+      <div className="bg-white md:hidden sm:block h-screen">
         <div className='flex items-center justify-between '>
            <h2 className="text-xl font-semibold mb-2">Create a Cohort</h2>
            
@@ -43,15 +43,11 @@ const Form:React.FC = () =>{
             </div>
            
           </div>
-          {/* <label className="block mb-1 text-sm font-sm ">Add a cohort avatar</label> */}
+          
           <DragAndDop onFileUpload={handleFileUpload}/>
-          {/* <p className='text-sm font-sm pb-3'>you can do this later</p>  */}
-          {/* <label className="block mb-1 text-sm font-sm ">Add a cohort avatar</label>
-          <input type="file" className="border p-2  w-full"/>
-          <p className='text-sm font-sm pb-3'>you can do this later</p> */}
           <div className="flex flex-col">
           <button type="submit" className="create-cohort-btn bg- w-full text-white p-3 mb-3 rounded-md">Create Cohort</button>
-            <button type="button" className="cancel-btn bg-gray-200 w-full  p-3 rounded-md">Cancel</button>
+            <button type="button" className="cancel-btn bg-gray-200 w-full p-3 rounded-md">Cancel</button>
             
           </div>
         </form>
@@ -63,22 +59,3 @@ const Form:React.FC = () =>{
 }
 export default Form;
 
-{/* <div className="form-container">
-            <h2>Create a Cohort</h2>
-            <form>
-                <label>Cohort name</label>
-                <input/>
-                <label>Description</label>
-                <textarea></textarea>
-                <label>Program</label>
-                <button className="flex items-center justify-between p-2 border bg-white w-full rounded-md shadow-sm ring-1 ring-inset mt-2">
-                    <span>add</span>
-                    <span>
-                        <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"      aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                   </span>
-                </button>
-                <DragAndDop/>
-            </form>
-         </div> */}

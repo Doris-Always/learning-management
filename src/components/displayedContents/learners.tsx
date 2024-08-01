@@ -23,7 +23,7 @@ const Learners = () =>{
 
 
                 </div> */}
-                <CohortDropdown/>
+                {/* <CohortDropdown/> */}
                 <div className="empty-contents p-8 flex flex-col justify-center items-center lg:mx-60">
                     <img src="/empty.png" alt="this is an image displayed when this content is empty"/>
                     <h4 className="font-semibold pb-2">Empty Space</h4>

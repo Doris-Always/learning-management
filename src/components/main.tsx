@@ -7,6 +7,8 @@ import Cohorts from "./displayedContents/cohorts";
 import Programs from "./displayedContents/programs";
 import Instructors from "./displayedContents/instructors";
 import Learners from "./displayedContents/learners";
+import CohortDropdown from "./displayedContents/dropdown";
+import DropdownContentSwitch from "./smDropdownContent/dropDownContentSwitch"
 interface MainSectionProps{
     children: ReactNode;
 }
@@ -16,10 +18,15 @@ const MainSection: React.FC<MainSectionProps> = ({children}) =>{
 
     return(
         <>
-        <div className = ' md:flex flex-row flex-grow'>
+        <div className = ' md:flex flex-grow h-screen'>
         <SideNav/>
-        <SideBarMainContent/>
+        <CohortDropdown />
+        <SideBarMainContent />
+        {/* <SideBarMainContent/> */}
       </div>
+      {/* <div className="flex-grow">
+       
+      </div> */}
 
             {/* <div className="flex">
                 <div className="flex h-screen">

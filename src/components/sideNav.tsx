@@ -42,6 +42,7 @@ const SideNav: React.FC = () => {
     useEffect(()=>{
         if(!activeItem){
             dispatch(setButtonDisplay('cohorts'))
+            
         }
     },[dispatch, activeItem])
 

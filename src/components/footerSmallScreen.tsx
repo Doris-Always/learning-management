@@ -25,7 +25,7 @@ const FooterSmallScreen:React.FC = () =>{
     return(
         <>
 
-           <footer className="w-full flex justify-between item-center mt-auto shadow-xl bg-white md:hidden sm-block ">
+           <footer className="w-full flex justify-between item-center shadow-xl bg-white md:hidden sm-block h-screen">
            <ul className="flex justify-between items-center w-full">
             {menuItems.map((item) => (
             <FooterNavItems key={item.name} name={item.name} icon={item.icon} link={item.link} />

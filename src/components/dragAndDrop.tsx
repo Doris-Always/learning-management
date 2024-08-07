@@ -9,6 +9,7 @@ const DragAndDrop: React.FC<FileUploadProps> = ({onFileUpload}) =>{
     
         const fileInputRef = useRef<HTMLInputElement>(null);
         const [file, setFile] = useState<File | null>(null);
+        const [filePickerActive, setFilePickerActive] = useState(false);
       
         const onDrop = useCallback((acceptedFiles: File[]) => {
           if (acceptedFiles.length > 0) {
@@ -36,7 +37,15 @@ const DragAndDrop: React.FC<FileUploadProps> = ({onFileUpload}) =>{
       setFile(selectedFile);
       onFileUpload(selectedFile);
     }
-      };
+     setFilePickerActive(false);
+    };
+
+    const handleClick = () => {
+      if (!filePickerActive) {
+        setFilePickerActive(true); // Set the flag when file picker is active
+        fileInputRef.current?.click();
+      }
+    };
     
     return(
         <>
@@ -44,14 +53,15 @@ const DragAndDrop: React.FC<FileUploadProps> = ({onFileUpload}) =>{
         <div {...getRootProps()} className="file-upload border-dashed border-2 rounded-lg border-blue-300 p-6 text-center cursor-pointer ">
         <div className="flex flex-col justify-center text-center items-center mb-3">
             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21.5 15V19C21.5 19.5304 21.2893 20.0391 20.9142 20.4142C20.5391 20.7893 20.0304 21 19.5 21H5.5C4.96957 21 4.46086 20.7893 4.08579 20.4142C3.71071 20.0391 3.5 19.5304 3.5 19V15" stroke="#475661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21.5 15V19C21.5 19.5304 21.2893 20.0391 20.9142 20.4142C20.5391 20.7893 20.0304 21 19.5 21H5.5C4.96957 21 4.46086 20.7893 4.08579 20.4142C3.71071 20.0391 3.5 19.5304 3.5 19V15" stroke="#475661" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M17.5 8L12.5 3L7.5 8" stroke="#475661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.5 3V15" stroke="#475661" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.5 3V15" stroke="#475661" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         </div>
        
         <input {...getInputProps()} />
-        <div onClick={() => fileInputRef.current?.click()} >
+        <div onClick={handleClick} >
+        {/* onClick={() => fileInputRef.current?.click()} */}
             <p className="mb-2">{isDragActive ? 'Drop the files here...' : (
                <>
                   Drag and drop or <span className="text-blue-500">choose file</span>

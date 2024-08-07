@@ -1,0 +1,32 @@
+[
+    {
+        "course":"Design Thinking",
+        "module":10,
+        "image":"/enum/public/home.png"
+    
+    },
+    {
+        "course":"java",
+        "module":12,
+        "image":"/enum/public/home.png"
+        
+    
+    },
+    {
+        "course":"UX Writer",
+        "module":8,
+        "image":"/enum/public/home.png",
+        "instructor":{
+            "name":,
+            "profile":,
+            "image":,
+        }
+    
+    },
+    {
+        "course":"Buisness Management & Africa",
+        "module":10,
+        "image":"/enum/public/home.png"
+    
+    }
+]

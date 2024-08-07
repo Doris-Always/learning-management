@@ -5,6 +5,7 @@ import UseWindowWidth from "../screenResizingComp/useWindowWith";
 import "../../styles/displayContent.css";
 import Form from "../createCohortForm";
 import CreateCohortModal from "../createCohortModal";
+import AddedCohortList from "../addedCohortList";
 
 const Cohorts = () =>{
     const selectedButton = useAppSelector(state=> state.sideNavButton.buttonDisplay)
@@ -36,8 +37,9 @@ const Cohorts = () =>{
         <>
          <div className="flex flex-col ">
             <h2 className="hidden md:block font-semibold text-lg m-10">Cohorts</h2>
+            {/* <AddedCohortList/> */}
             
-            {/* <CohortDropdown/> */}
+           
             <div className="empty-contents p-8 flex flex-col justify-center items-center lg:mx-60">
                 {/* if cohort has not been created before 
                       then if inlineForm is not showing for small screen,
@@ -59,7 +61,7 @@ const Cohorts = () =>{
                         </>
                        
                         ):(
-    
+                            // <AddedCohortList/>
                         <Form/>
     
                     )}
@@ -67,11 +69,12 @@ const Cohorts = () =>{
                      
                 ):(
                  <>
-                    <div className="flex justify-between items-center w-full mb-4">
+                 <AddedCohortList/>
+                    {/* <div className="flex justify-between items-center w-full mb-4">
                     <button onClick={() => setIsCohortCreated(false)} className="bg-blue-500 text-white p-2 rounded-md">Create a Cohort</button>
                     <button className="bg-gray-200 p-2 rounded-md">More Actions</button>
                     </div>
-                    <input type="text" placeholder="Search" className="border p-2 w-full" />
+                    <input type="text" placeholder="Search" className="border p-2 w-full" /> */}
                  </>
                 )}
               
@@ -80,8 +83,9 @@ const Cohorts = () =>{
             </div>
 
             <CreateCohortModal isOpen={isModalOpen} onClose={handleFormCancel}/>
+            
         </div>
-       
+      
     </>
     )
 }

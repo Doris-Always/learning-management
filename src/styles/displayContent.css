@@ -12,3 +12,24 @@
     border: 2px solid #008EEF;
     color: #008EEF;
 }
+.cohort-list-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+ul.space-y-2 {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+ul.space-y-2 > li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

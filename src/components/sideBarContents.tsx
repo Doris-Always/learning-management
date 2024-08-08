@@ -11,12 +11,13 @@ const SideBarMainContent:React.FC = ()=>{
     const activeItem = useSelector((state: RootState) => state.sideNavButton.buttonDisplay);
 
     const dispatch = useDispatch();
+    
   
     const ActiveDisplay = () =>{
         return (
             <>
             {
-                activeItem === 'cohorts'? <Cohorts/> :
+                activeItem === 'cohorts' || activeItem === 'cohort'? <Cohorts/> :
                 activeItem === 'programs'? <Programs/> :
                 activeItem === 'instructors'? <Instructors/>:
                 activeItem === 'learners'? <Learners/>:
@@ -24,11 +25,11 @@ const SideBarMainContent:React.FC = ()=>{
 
             }
             </>
-        )
+        ) 
     }
     return(
         <>
-          <ActiveDisplay/>
+        <ActiveDisplay/>
         </>
     )
        

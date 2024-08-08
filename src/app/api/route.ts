@@ -13,37 +13,43 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
-export async function POST(request: Request) {
-    await dbConnect();
-    try {
-        const data = await request.json();
-        const { cohortName, description, programs, startDate, endDate, image} = data;
-        let imageUrl = '';
-        if (image) {
-          const result = await cloudinary.uploader.upload(image, {
-            upload_preset: 'cohort_images', // Your Cloudinary upload preset
-            folder: 'public',
-            // folder: 'cohorts',
-            transformation: [{ width: 240, height: 240, crop: 'limit' }],
-          });
-          imageUrl = result.secure_url;
-        }
+// export async function POST(request: Request) {
+//     await dbConnect();
+//     try {
+//         const data = await request.json();
+//         const { cohortName, description, programs, startDate, endDate, image} = data;
+//         let imageUrl = '';
+//         if (image) {
+//           const result = await cloudinary.uploader.upload(image, {
+//             upload_preset: 'cohort_images', // Your Cloudinary upload preset
+//             folder: 'public',
+//             // folder: 'cohorts',
+//             transformation: [{ width: 240, height: 240, crop: 'limit' }],
+//           });
+//           imageUrl = result.secure_url;
+//         }
     
-        const newCohort = new Cohort({
-            cohortName,
-            description,
-            programs,
-            startDate,
-            endDate,
-            image: imageUrl,
-          });
+//         const newCohort = new Cohort({
+//             cohortName,
+//             description,
+//             programs,
+//             startDate,
+//             endDate,
+//             image: imageUrl,
+//           });
       
-        // const newCohort = new Cohort(data);
-        await newCohort.save();
-        return NextResponse.json({ message: "Cohort created successfully", cohort: newCohort });
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message });
-    }
+//         // const newCohort = new Cohort(data);
+//         await newCohort.save();
+//         return NextResponse.json({ message: "Cohort created successfully", cohort: newCohort });
+//     } catch (err: any) {
+//         return NextResponse.json({ error: err.message });
+//     }
+// }
+
+export async function POST(request: Request){
+    await dbConnect();
+    console.log("hello");
+    return NextResponse.json({name: "its not working"})
 }
 
 export async function GET(){

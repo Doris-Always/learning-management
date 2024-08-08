@@ -26,6 +26,8 @@ const Form:React.FC = () =>{
 
   const handleSubmit = async (e: React.FormEvent) =>{
     e.preventDefault();
+    // console.log("working ............................");
+    
 
     const { cohortName, description, programs, startDate, endDate, imageFile } = formData;
     const formDataObj = new FormData();
@@ -124,14 +126,15 @@ const Form:React.FC = () =>{
            
           </div>
           
-          <DragAndDop onFileUpload={handleFileUpload}/>
+          {/* <DragAndDop onFileUpload={handleFileUpload}/> */}
           <div className="flex flex-col">
           <button type="submit" className="create-cohort-btn bg- w-full text-white p-3 mb-3 rounded-md">Create Cohort</button>
             <button type="button" className="cancel-btn bg-gray-200 w-full p-3 rounded-md">Cancel</button>
             
           </div>
         </form>
-      </div>
+ 
+       </div>
 
         </>
     )

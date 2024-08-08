@@ -25,7 +25,7 @@ const CohortDropdown:React.FC = () =>{
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<DropdownItem>(items[0]);
     useEffect(()=>{
-      // console.log("use effect is working 1")
+      // console.log("use effect is working 1"+ items[0].name.toLowerCase())cloudinary
         if(!activeItem){
             dispatch(setButtonDisplay(items[0].name.toLowerCase()))
 

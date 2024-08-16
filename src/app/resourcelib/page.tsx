@@ -1,5 +1,5 @@
 
-const ResourceLib: React.FC = () =>{
+const ResourceLib = () =>{
     return(
         <>
             <main className="flex min-h-screen">

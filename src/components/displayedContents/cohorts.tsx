@@ -67,16 +67,25 @@ const Cohorts = () =>{
         fetchCohorts();
       }, []);
       
-
+     
 
     const handleCreateCohort = () =>{
-        console.log("a click has happened")
-        showFormForMobile(true)
-        if(windowWidth >= 768){
-            setIsModalOpen(true)
-        }else{
-            setShowInlineForm(true)
+        console.log("A click has happened");
+        showFormForMobile(true);
+      
+        // Handle the case where 'windowWidth' might be null
+        if (windowWidth !== null && windowWidth >= 768) {
+          setIsModalOpen(true);
+        } else {
+          setShowInlineForm(true);
         }
+        // console.log("a click has happened")
+        // showFormForMobile(true)
+        // if(windowWidth >= 768){
+        //     setIsModalOpen(true)
+        // }else{
+        //     setShowInlineForm(true)
+        // }
     };
     const handleFormCancel = () =>{
       setShowInlineForm(false);

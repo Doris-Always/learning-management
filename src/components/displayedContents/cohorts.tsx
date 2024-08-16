@@ -1,3 +1,4 @@
+'use client'
 import { useAppSelector } from "@/ReduxStore/Store";
 import {useEffect} from 'react'
 import CohortDropdown from "./dropdown";

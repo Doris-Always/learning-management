@@ -9,11 +9,9 @@ import Instructors from "./displayedContents/instructors";
 import Learners from "./displayedContents/learners";
 import CohortDropdown from "./displayedContents/dropdown";
 // import DropdownContentSwitch from "./smDropdownContent/dropDownContentSwitch"
-interface MainSectionProps{
-    children: ReactNode;
-}
 
-const MainSection: React.FC<MainSectionProps> = ({children}) =>{
+
+const MainSection = () =>{
 
 
     return(

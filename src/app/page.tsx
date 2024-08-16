@@ -1,5 +1,10 @@
+'use client'
+
 import Image from "next/image";
 import Header from "@/components/header";
+import MainSection from "@/components/main";
+
+
 
 export default function Home() {
   return (
@@ -9,7 +14,7 @@ export default function Home() {
       <main className="flex min-h-screen ">
         {/* <div className=""></div> */}
       {/* <h1 className="">Home</h1> */}
-      <main/>
+      <MainSection />
       
       
       

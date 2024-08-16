@@ -31,7 +31,7 @@ export default function RootLayout({
         <Header/>
         <SmallScreenHeader/>
         <Hero/>
-        <MainSection>{children}</MainSection>
+        <MainSection></MainSection>
         <FooterSmallScreen/>
           {/* {children} */}
           </Provider>

@@ -1,52 +1,115 @@
 import "../styles/displayContent.css";
+import { useState } from "react";
+import UseWindowWidth from "../components/screenResizingComp/useWindowWith";
 
-const AddedCohortList:React.FC = ({ setIsCohortCreated }) =>{
-    const cohorts = [
-        { id: 1, name: "Cohort 1", modules: 5, imgSrc: "/cohort1.png" },
-        { id: 2, name: "Cohort 2", modules: 8, imgSrc: "/cohort2.png" },
-        { id: 3, name: "Cohort 3", modules: 12, imgSrc: "/cohort3.png" },
-    ]
+
+const AddedCohortList = ({ cohorts,onCreateCohort }: { cohorts: any[],onCreateCohort: () => void }) =>{
+
+  const windowWidth = UseWindowWidth();
+
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+  
+    const suffix = (day: number) => {
+      if (day > 3 && day < 21) return 'th';
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+  
+    return `Created ${day}${suffix(day)} ${month} ${year}`;
+  };
+  console.log("frommmm =======>", cohorts)
     return(
         <>
         {/* hide for medium screen */}
+
+        
+    <div className=" hidden md:block w-full ">
+        <div className="flex justify-between items-center mb-4">
+        <div className="w-[50%]">
+            <input type="text" placeholder="Search" className="border p-2 w-full mb-4" />
+         </div>
+
+         <div className="">
+          <button onClick={onCreateCohort} className="bg-[#008EEF] mr-4 text-white p-2 rounded-md">Create a Cohort</button>
+          <button className="bg-white border-2 p-2 rounded-md">More Actions</button>
+         </div>
+          
+          
+
+    </div>
+       
+      
+      <ul className="">
+        {cohorts.map(cohort => (
+          <li key={cohort.id} className="flex items-center mb-2 shadow-sm p-4">
+            <img src="/unsplash_gbNuQfm9hTE.png" alt="picture of the cohort" className=" mr-2" />
+            <div className="cohort-info bg-white flex ml-4 justify-between items-center w-full py-4">
+              <div className="flex flex-row  items-center w-[55%]">
+                <div className="cohort-comp mr-8 w-[30%] ">
+                  <h3 className="truncate font-normal">{cohort.cohortName}</h3>
+                  <p className="truncate text-xs font-medium text-gray-500">{cohort.programs}</p>
+                </div>
+
+                <div className="flex flex-row w-[35%] text-sm">
+                  
+                  <div className="mr-2"> <img src="/user.png" className="w-[15px] pt-4" alt=""/> </div>
+                  <p className="text-gray-600 pt-4">25 Learners </p>
+                </div>
+              </div>
+              <div className="date-comp">
+                <p className="text-sm text-gray-500">{formatDate(cohort.startDate)}</p>
+              </div>
+             
+            </div>
+          </li>
+        ))}
+      </ul> 
+    </div>
+
         <div className="cohorted-created-component w-full sm:block md:hidden">
              <div className="flex justify-between items-center w-full mb-4">
-                <button className="create-cohort-btn text-white w-full p-2 rounded-md mr-2">Create a Cohort</button>
+                <button onClick={onCreateCohort} className="create-cohort-btn text-white w-full p-2 rounded-md mr-2">Create a Cohort</button>
                 <button className="bg-white border-3 p-2 w-full border-2 rounded-md ">More Actions</button>
             </div>
             <input type="text" placeholder="Search" className="border p-2 w-full rounded-md mt-2" />
-            <ul>
-        {cohorts.map(cohort => (
-          <li key={cohort.id} className="flex items-center mb-2">
-            <img src={cohort.imgSrc} alt={cohort.name} className="w-6 h-6 mr-2" />
-            <div>
-              <div>{cohort.name}</div>
-              <div>{cohort.modules} modules</div>
+            <ul className="pt-4">
+         {cohorts.map(cohort => (
+          <li key={cohort.id} className="flex  bg-white items-center shadow-sm p-4 mb-2">
+            <img src="/unsplash_gbNuQfm9hTE.png" alt="the picture of the cohort" className="w-6 h-6 " />
+            <div className="cohort-info flex ml-4 justify-between items-center w-full">
+              <div className="flex flex-col items-center ">
+                <div className="cohort-comp mr-8  ">
+                  <h3 className="truncate font-normal">{cohort.cohortName}</h3>
+                  <p className="truncate text-xs font-medium text-gray-500">{cohort.programs}</p>
+                </div>
+
+               
+              </div>
+              <div className="flex flex-row text-sm">
+                  
+                  <div className=""> <img src="/user.png" className="w-[15px] pt-2" alt=""/> </div>
+                  <p className="text-gray-600 pt-2">25 Learners </p>
+                </div>
+              {/* <div className="date-comp">
+                <p className="text-sm text-gray-500">{formatDate(cohort.startDate)}</p>
+              </div>
+              */}
             </div>
           </li>
         ))}
-      </ul>
+      </ul> 
         </div>  
         {/* hide for small screen   */}
 
-    <div className="cohort-list-container  md:block sm:hidden border-2  p-4">
-      <div className="flex justify-between items-center w-full mb-4">
-        <button onClick={() => setIsCohortCreated(false)} className="bg-blue-500 text-white p-2 rounded-md">Create a Cohort</button>
-        <button className="bg-gray-200 p-2 rounded-md">More Actions</button>
-      </div>
-      <input type="text" placeholder="Search" className="border p-2 w-full mb-4" />
-      <ul>
-        {cohorts.map(cohort => (
-          <li key={cohort.id} className="flex items-center mb-2">
-            <img src={cohort.imgSrc} alt={cohort.name} className="w-6 h-6 mr-2" />
-            <div>
-              <div>{cohort.name}</div>
-              <div>{cohort.modules} modules</div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
 
 
         {/* <div className="cohorted-created-component w-full md:block hidden flex justify-between border-2">
@@ -62,5 +125,3 @@ const AddedCohortList:React.FC = ({ setIsCohortCreated }) =>{
     )
 }
 export default AddedCohortList;
-
-// onClick={() => setIsCohortCreated(false)}

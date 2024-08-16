@@ -12,6 +12,8 @@ const DragAndDrop: React.FC<FileUploadProps> = ({onFileUpload}) =>{
         const [filePickerActive, setFilePickerActive] = useState(false);
       
         const onDrop = useCallback((acceptedFiles: File[]) => {
+          console.log("dropped!");
+          
           if (acceptedFiles.length > 0) {
             const selectedFile = acceptedFiles[0];
             setFile(selectedFile);
@@ -61,6 +63,7 @@ const DragAndDrop: React.FC<FileUploadProps> = ({onFileUpload}) =>{
        
         <input {...getInputProps()} />
         <div onClick={handleClick} >
+          {isDragActive}
         {/* onClick={() => fileInputRef.current?.click()} */}
             <p className="mb-2">{isDragActive ? 'Drop the files here...' : (
                <>

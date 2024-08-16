@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState} from "react"
 import DragAndDrop from "./dragAndDrop";
 import "../styles/displayContent.css";
 
@@ -11,9 +12,52 @@ interface CreateCohortModalProps {
 const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   const handleFileUpload = (file: File) => {
-    console.log('Uploaded file:', file);
-    
+    setFormData({ ...formData, imageFile: file });
   };
+
+
+  const [formData, setFormData] = useState({
+    cohortName: '',
+    description: '',
+    programs: '',
+    startDate: '',
+    endDate: '',
+    imageFile: null as File | null,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { cohortName, description, programs, startDate, endDate } = formData;
+
+    const data = {
+        cohortName,
+        description,
+        programs,
+        startDate,
+        endDate,
+        // image: imageFile // Convert the image to base64 if needed
+    };
+    const response = await fetch('/api/cohorts', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  });
+
+  const result =  response.json;
+  if (response.ok) {
+      console.log('Cohort created successfully', result);
+  } else {
+      console.error('Error creating cohort:', result);
+  }
+};
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -29,12 +73,24 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
            </div>
         </div>
         
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* Form fields here */}
           <label className="block mb-1 text-sm font-sm ">Cohort Name</label>
-          <input type="text-sm" placeholder="Ex. Cohort 1" className="border-2 p-2 mb-4 w-full rounded-md"/>
+          <input type="text-sm"
+           placeholder="Ex. Cohort 1"
+           name="cohortName"
+           value={formData.cohortName}
+           onChange={handleInputChange}
+           className="border-2 p-2 mb-4 w-full rounded-md"/>
+
           <label className="block mb-1 text-sm font-sm ">Description</label>
-          <textarea placeholder="Ex. A space for python developers" className="text-sm shadow-sm border-2 ring-inset p-3 mb-4 w-full rounded-md mt-3 h-32 "></textarea>
+          <textarea 
+          placeholder="Ex. A space for python developers" 
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          className="text-sm shadow-sm border-2 ring-inset p-3 mb-4 w-full rounded-md mt-3 h-32 "></textarea>
+
           <label className="block mb-1 text-sm font-sm ">Program</label>
                 <button className="flex items-center mb-4 justify-between p-2 border-2 bg-white w-full rounded-md shadow-sm ring-inset mt-2">
                     <span></span>
@@ -47,12 +103,22 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
           <div className='flex items-center mb-4'>
             <div className='mb-4'>
                 <label className="block mb-2 text-sm font-sm ">Start Date</label>
-                <input type="date" placeholder='23 Dec 2021' className="border-2 p-2 rounded-md"/>
+                <input type="date"
+                 placeholder='23 Dec 2021' 
+                 name="startDate"
+                 value={formData.startDate}
+                 onChange={handleInputChange}
+                 className="border-2 p-2 rounded-md"/>
             </div>
            
             <div className='mb-4 ml-4'>
             <label className="block mb-2 text-sm font-sm  ">End Date</label>
-                <input type="date" placeholder='23 Dec 2021' className="border-2 rounded-md p-2"/>
+                <input type="date" 
+                placeholder='23 Dec 2021' 
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleInputChange}
+                className="border-2 rounded-md p-2"/>
             </div>
            
           </div>

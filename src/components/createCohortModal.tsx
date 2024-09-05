@@ -11,10 +11,9 @@ interface CreateCohortModalProps {
 
 const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
-  const handleFileUpload = (file: File) => {
-    setFormData({ ...formData, imageFile: file });
-  };
-
+  
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
+ 
 
   const [formData, setFormData] = useState({
     cohortName: '',
@@ -25,38 +24,104 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
     imageFile: null as File | null,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [errors, setErrors] = useState({
+    cohortName: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+    // imageFile: '',
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {
+      cohortName: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+      // imageFile: '',
+    };
+    if (!formData.cohortName) {
+      newErrors.cohortName = 'Cohort Name is required';
+      valid = false;
+    }
+    if (!formData.description) {
+      newErrors.description = 'Description is required';
+      valid = false;
+    }
+    if (!formData.startDate) {
+      newErrors.startDate = 'Start Date is required';
+      valid = false;
+    }
+    if (!formData.endDate) {
+      newErrors.endDate = 'End Date is required';
+      valid = false;
+    }
+    // if (!formData.imageFile) {
+    //   newErrors.imageFile = 'An image is required';
+    //   valid = false;
+    // }
+
+    setErrors(newErrors);
+    return valid;
   };
 
   
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleFileUpload = (file: File) => {
+    setFormData({ ...formData, imageFile: file });
+  };
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setResponseMessage('Cohort created successfully!');
+
+    if (!validateForm()) {
+      return; 
+    }
 
     const { cohortName, description, programs, startDate, endDate } = formData;
-
+    const capitalizedCohortName = cohortName.trim().charAt(0).toUpperCase() + cohortName.trim().slice(1).toLowerCase();
     const data = {
-        cohortName,
+        cohortName: capitalizedCohortName,
         description,
         programs,
         startDate,
         endDate,
         // image: imageFile // Convert the image to base64 if needed
     };
+    try{
+
+   
     const response = await fetch('/api/cohorts', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-  });
+  })
 
-  const result =  response.json;
+
+  const result = await response.json();
+
   if (response.ok) {
-      console.log('Cohort created successfully', result);
+    setResponseMessage('Cohort created successfully!');
   } else {
-      console.error('Error creating cohort:', result);
+    console.log("cohort already exist")
+    setResponseMessage(result.error || 'cohort exist');
   }
+}catch (error) {
+  setResponseMessage('A network error occurred. Please try again.');
+}
+
+  // const result =  response.json;
+  // if (response.ok) {
+  //     console.log('Cohort created successfully', result);
+  // } else {
+  //     console.error('Error creating cohort:', result);
+  // }
 };
 
   return (
@@ -72,7 +137,14 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
           </svg>
            </div>
         </div>
-        
+        <>
+        {responseMessage && (
+          <p className={`text-md border-2 bg-white mb-4 p-4 ${  responseMessage.includes('error') || responseMessage.includes('Error') || !responseMessage.toLowerCase().includes('success') ? 'text-red-500 border-red-500 border-dotted' : 'text-green-500 border-green-500 font-bold'}`}>
+            {responseMessage}
+          </p>
+        )}
+        </>
+       
         <form onSubmit={handleSubmit}>
           {/* Form fields here */}
           <label className="block mb-1 text-sm font-sm ">Cohort Name</label>
@@ -82,7 +154,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
            value={formData.cohortName}
            onChange={handleInputChange}
            className="border-2 p-2 mb-4 w-full rounded-md"/>
-
+            {errors.cohortName && <p className="text-red-500 text-sm mb-1">{errors.cohortName}</p>}
           <label className="block mb-1 text-sm font-sm ">Description</label>
           <textarea 
           placeholder="Ex. A space for python developers" 
@@ -90,7 +162,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
           value={formData.description}
           onChange={handleInputChange}
           className="text-sm shadow-sm border-2 ring-inset p-3 mb-4 w-full rounded-md mt-3 h-32 "></textarea>
-
+           {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
           <label className="block mb-1 text-sm font-sm ">Program</label>
                 <button className="flex items-center mb-4 justify-between p-2 border-2 bg-white w-full rounded-md shadow-sm ring-inset mt-2">
                     <span></span>
@@ -109,6 +181,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
                  value={formData.startDate}
                  onChange={handleInputChange}
                  className="border-2 p-2 rounded-md"/>
+                 {errors.startDate && <p className="text-red-500 text-sm">{errors.startDate}</p>}
             </div>
            
             <div className='mb-4 ml-4'>
@@ -119,10 +192,12 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
                 value={formData.endDate}
                 onChange={handleInputChange}
                 className="border-2 rounded-md p-2"/>
+                  {errors.endDate && <p className="text-red-500 text-sm">{errors.endDate}</p>}
             </div>
            
           </div>
           <DragAndDrop onFileUpload={handleFileUpload}/>
+           {/* {errors.imageFile && <p className="text-red-500 text-sm">{errors.imageFile}</p>} */}
           {/* <label className="block mb-1 text-sm font-sm ">Add a cohort avatar</label>
           <input type="file" className="border p-2  w-full"/>
           <p className='text-sm font-sm'>you can do this later</p> */}

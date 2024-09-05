@@ -16,9 +16,12 @@ const MainSection = () =>{
 
     return(
         <>
-        <div className = ' md:flex flex-grow h-screen'>
+        <div className = ' md:flex flex-grow '>
         <SideNav/>
+       
         <CohortDropdown />
+      
+        
         <SideBarMainContent />
        
       </div>

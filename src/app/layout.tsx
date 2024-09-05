@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import {store} from '../ReduxStore/Store'
 import MainSection from "@/components/main";
 import SmallScreenHeader from "@/components/smallScreenHeader";
-import FooterSmallScreen from "@/components/footerSmallScreen";
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -28,12 +28,10 @@ export default function RootLayout({
       <body className={inter.className}>
         
         <Provider store={store}>
-        <Header/>
-        <SmallScreenHeader/>
-        <Hero/>
-        <MainSection></MainSection>
-        <FooterSmallScreen/>
-          {/* {children} */}
+       
+        {/* <MainSection></MainSection> */}
+     
+          {children}
           </Provider>
       
       </body>

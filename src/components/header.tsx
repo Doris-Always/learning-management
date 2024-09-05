@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link';
 import EnumLogo from "@/assets/icons/enum";
 import Profile from "@/assets/icons/user";
 import BellIcon from "@/assets/icons/bell"
@@ -45,9 +45,9 @@ const Header: React.FC = () =>{
                     <ul className="flex space-x-4">
                         {menuItems.map((item)=>(
                             <li key={item.name} className="link">
-                                <a href={item.link}
+                                <Link href={item.link}
                                     className={`${styles.link} ${pathname === item.link ? styles['link-active'] : styles['link-inactive']}`}
-                                >{item.name}</a>
+                                >{item.name}</Link>
                             </li>
                         ))}
                     </ul>

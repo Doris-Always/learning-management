@@ -3,7 +3,7 @@ import { useState } from "react";
 import UseWindowWidth from "../components/screenResizingComp/useWindowWith";
 
 
-const AddedCohortList = ({ cohorts,onCreateCohort }: { cohorts: any[],onCreateCohort: () => void }) =>{
+const AddedCohortList = ({ cohorts,handleCreateCohort  }: { cohorts: any[],handleCreateCohort : () => void }) =>{
 
   const windowWidth = UseWindowWidth();
 
@@ -39,14 +39,15 @@ const AddedCohortList = ({ cohorts,onCreateCohort }: { cohorts: any[],onCreateCo
          </div>
 
          <div className="">
-          <button onClick={onCreateCohort} className="bg-[#008EEF] mr-4 text-white p-2 rounded-md">Create a Cohort</button>
+          <button onClick={handleCreateCohort } className="bg-[#008EEF] mr-4 text-white p-2 rounded-md">Create a Cohort</button>
           <button className="bg-white border-2 p-2 rounded-md">More Actions</button>
          </div>
           
-          
+         
+               
 
     </div>
-       
+    
       
       <ul className="">
         {cohorts.map(cohort => (
@@ -77,7 +78,7 @@ const AddedCohortList = ({ cohorts,onCreateCohort }: { cohorts: any[],onCreateCo
 
         <div className="cohorted-created-component w-full sm:block md:hidden">
              <div className="flex justify-between items-center w-full mb-4">
-                <button onClick={onCreateCohort} className="create-cohort-btn text-white w-full p-2 rounded-md mr-2">Create a Cohort</button>
+                <button onClick={handleCreateCohort} className="create-cohort-btn text-white w-full p-2 rounded-md mr-2">Create a Cohort</button>
                 <button className="bg-white border-3 p-2 w-full border-2 rounded-md ">More Actions</button>
             </div>
             <input type="text" placeholder="Search" className="border p-2 w-full rounded-md mt-2" />
@@ -107,6 +108,7 @@ const AddedCohortList = ({ cohorts,onCreateCohort }: { cohorts: any[],onCreateCo
           </li>
         ))}
       </ul> 
+      
         </div>  
         {/* hide for small screen   */}
 

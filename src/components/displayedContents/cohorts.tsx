@@ -21,24 +21,6 @@ const Cohorts = () =>{
 
     const windowWidth = UseWindowWidth();
 
-
-    
-    // useEffect(() => {
-    //     const fetchCohorts = async () => {
-    //       const response = await fetch('/api/cohorts', {
-    //         method: 'GET',
-    //       });
-      
-    //       const result = await response.json();
-    //       if (response.ok) {
-    //         console.log('Cohorts fetched successfully', result);
-    //         setCohorts(result)
-    //       } else {
-    //         console.error('Error fetching cohorts:', result.error);
-    //       }
-    //     };
-    //     fetchCohorts();
-    //   }, []);
     useEffect(() => {
         const fetchCohorts = async () => {
           try {
@@ -73,6 +55,8 @@ const Cohorts = () =>{
     const handleCreateCohort = () =>{
         console.log("A click has happened");
         showFormForMobile(true);
+        setShowInlineForm(true);
+        
       
         // Handle the case where 'windowWidth' might be null
         if (windowWidth !== null && windowWidth >= 768) {
@@ -153,7 +137,7 @@ const Cohorts = () =>{
                      
                 ):(
                  <>
-                                          <AddedCohortList cohorts = {cohorts} onCreateCohort={handleCreateCohort }/>
+                                          <AddedCohortList cohorts = {cohorts} handleCreateCohort={handleCreateCohort }/>
                     {/* <div className="flex justify-between items-center w-full mb-4">
                     <button onClick={() => setIsCohortCreated(false)} className="bg-blue-500 text-white p-2 rounded-md">Create a Cohort</button>
                     <button className="bg-gray-200 p-2 rounded-md">More Actions</button>

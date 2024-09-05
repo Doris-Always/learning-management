@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Header from "@/components/header";
 import MainSection from "@/components/main";
+import SmallScreenHeader from "@/components/smallScreenHeader";
+import FooterSmallScreen from "@/components/footerSmallScreen";
+import Hero from "@/components/heroSection"
 
 
 
@@ -10,15 +13,26 @@ export default function Home() {
   return (
  
     <>
-     
-      <main className="flex min-h-screen ">
+       <Header/>
+      <SmallScreenHeader/>
+      <Hero/>
+  
+    
+      <MainSection />
+      <FooterSmallScreen/>
+      {/* <main className="flex min-h-screen "> */}
         {/* <div className=""></div> */}
       {/* <h1 className="">Home</h1> */}
-      <MainSection />
+    
+     
       
       
       
-      
+      {/* </main> */}
+    </>
+  );
+}
+
       
       
       
@@ -160,7 +174,4 @@ export default function Home() {
           </p>
         </a>
       </div> */}
-    </main>
-    </>
-  );
-}
+   

@@ -27,7 +27,13 @@ export async function POST(request: NextRequest) {
     //   });
     //   imageUrl = result.secure_url;
     // }
-    
+
+    const existingCohort = await Cohort.findOne({ cohortName});
+    if (existingCohort) {
+      return NextResponse.json({ error: 'Cohort with the same name and description already exists.' }, { status: 400 });
+    }
+
+   
     const newCohort = new Cohort({
       cohortName,
       description,
@@ -50,6 +56,7 @@ export async function GET() {
   
   try {
     const cohorts = await Cohort.find({});
+
     return NextResponse.json(cohorts);
   } catch (err: any) {
     return NextResponse.json({ error: err.message });

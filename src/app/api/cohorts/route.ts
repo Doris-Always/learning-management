@@ -17,6 +17,9 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     const { cohortName, description, programs, startDate, endDate, image } = data;
+    const trimmedCohortName = cohortName.trim();
+    const trimmedDescription = description.trim();
+    const trimmedPrograms = programs.trim();
     
     // let imageUrl = '';
     // if (image) {
@@ -28,21 +31,25 @@ export async function POST(request: NextRequest) {
     //   imageUrl = result.secure_url;
     // }
 
-    const existingCohort = await Cohort.findOne({ cohortName});
+    const existingCohort = await Cohort.findOne({ cohortName: trimmedCohortName });
+    
     if (existingCohort) {
       return NextResponse.json({ error: 'Cohort with the same name and description already exists.' }, { status: 400 });
     }
 
    
     const newCohort = new Cohort({
-      cohortName,
-      description,
-      programs,
+      cohortName: trimmedCohortName,
+      description: trimmedDescription,
+      programs: trimmedPrograms,
       startDate,
       endDate,
       // image: imageUrl,
     });
     
+    if (!cohortName || !description || !startDate || !endDate) {
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
     await newCohort.save();
     return NextResponse.json({ message: "Cohort created successfully", cohort: newCohort });
   } catch (err: any) {

@@ -80,7 +80,7 @@ const CreateCohortForm: React.FC<ChildComponentProps> = ({ cancelForm, handleCan
     const { cohortName, description, programs, startDate, endDate } = formData;
     const capitalizedCohortName = cohortName.trim().charAt(0).toUpperCase() + cohortName.trim().slice(1).toLowerCase();
     const data = {
-        cohortName,
+        cohortName: capitalizedCohortName,
         description,
         programs,
         startDate,

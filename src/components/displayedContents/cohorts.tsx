@@ -97,13 +97,7 @@ const Cohorts = () =>{
             
             
             <div className="empty-contents p-8 flex flex-col justify-center items-center ">
-            {/* {formForMobile && <Form />} */}
-                {/* if cohort has not been created before 
-                      then if inlineForm is not showing for small screen,
-                        show the content displayed for when cohort is empty
-                        else display the inlineForm for small screen
-                    else(for large screen) display the modal that has the form
-                */}
+            
                 {cohorts.length == 0 ? (
                  <>
                    {!showInlineForm ?  (

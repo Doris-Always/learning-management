@@ -41,11 +41,12 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
       endDate: '',
       // imageFile: '',
     };
-    if (!formData.cohortName) {
+    const trimmedCohortName = formData.cohortName.trim();
+    if (!trimmedCohortName) {
       newErrors.cohortName = 'Cohort Name is required';
       valid = false;
     }
-    if (!formData.description) {
+    if (!formData.description.trim()) {
       newErrors.description = 'Description is required';
       valid = false;
     }
@@ -68,6 +69,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
 
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleFileUpload = (file: File) => {

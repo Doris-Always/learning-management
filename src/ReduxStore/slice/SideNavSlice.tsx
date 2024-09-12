@@ -10,7 +10,7 @@ interface SideNav {
 }
 
 const initialState : SideNav ={
-  buttonDisplay: "cohort",
+  buttonDisplay: "cohorts",
   // selectedItem: null,
   
   

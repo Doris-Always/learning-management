@@ -201,8 +201,8 @@ const CreateCohortForm: React.FC<ChildComponentProps> = ({ cancelForm, handleCan
             {/* <DragAndDop onFileUpload={handleFileUpload} /> */}
             {/* {errors.imageFile && <p className="text-red-500 text-sm">{errors.imageFile}</p>} */}
             <div className="flex flex-col relative z-10">
-              <button type="submit" className="create-cohort-btn bg- w-full text-white p-3 mb-3 rounded-md">Create Cohort</button>
-              <button type="button" onClick={handleCancelFormMobile} className="cancel-btn bg-gray-200 w-full p-3 rounded-md">Cancel</button>
+              <button type="submit" className="create-cohort-btn bg- w-full text-white p-3 mb-3 rounded-md"><p className='font-bold'>Create Cohort</p></button>
+              <button type="button" onClick={handleCancelFormMobile} className="cancel-btn  w-full p-3 rounded-md"><p className='font-bold'> Cancel</p></button>
             </div>
           </form>
         </div>

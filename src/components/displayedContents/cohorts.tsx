@@ -93,7 +93,7 @@ const Cohorts = () =>{
         <>
          <div className="w-full">
             <h2 className="hidden md:block font-semibold text-lg m-10">Cohorts</h2>
-            {/* <AddedCohortList/> */}
+           
             
             
             <div className="empty-contents p-8 flex flex-col justify-center items-center ">

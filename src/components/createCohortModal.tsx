@@ -78,11 +78,12 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setResponseMessage('Cohort created successfully!');
-
     if (!validateForm()) {
       return; 
     }
+    setResponseMessage('Cohort created successfully!');
+    
+   
 
     const { cohortName, description, programs, startDate, endDate } = formData;
     const capitalizedCohortName = cohortName.trim().charAt(0).toUpperCase() + cohortName.trim().slice(1).toLowerCase();
@@ -110,6 +111,14 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
 
   if (response.ok) {
     setResponseMessage('Cohort created successfully!');
+    setFormData({
+      cohortName: '',
+      description: '',
+      programs: '',
+      startDate: '',
+      endDate: '',
+      imageFile: null,
+    });
   } else {
     console.log("cohort already exist")
     setResponseMessage(result.error || 'cohort exist');
@@ -118,13 +127,9 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
   setResponseMessage('A network error occurred. Please try again.');
 }
 
-  // const result =  response.json;
-  // if (response.ok) {
-  //     console.log('Cohort created successfully', result);
-  // } else {
-  //     console.error('Error creating cohort:', result);
-  // }
+
 };
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -204,8 +209,8 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
           <input type="file" className="border p-2  w-full"/>
           <p className='text-sm font-sm'>you can do this later</p> */}
           <div className="flex justify-end">
-            <button type="button" onClick={onClose} className="cancel-btn bg-gray-200 p-3 rounded-md mr-2">Cancel</button>
-            <button type="submit" className="create-cohort-btn text-white p-3 rounded-md">Create Cohort</button>
+            <button type="button" onClick={onClose} className="cancel-btn w-28  p-3 rounded-md mr-2"><p className='font-bold'> Cancel</p></button>
+            <button type="submit" className="create-cohort-btn w-40 text-white p-3 rounded-md"><p className='font-bold'>Create Cohort</p> </button>
           </div>
         </form>
       </div>

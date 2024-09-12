@@ -14,12 +14,15 @@ interface Props{
 
 
 const SideNavItems: React.FC<Props> = ({name,icon,active,onClick})=>(
+    
     <li 
-    className={`flex items-center p-4 cursor-pointer ${active ? ['active-nav-style'] : 'nav-style'}`} 
+    className={`flex items-center p-4 cursor-pointer ${active ? 'active-nav-style' : 'nav-style'}`} 
+    // className={`flex items-center p-4 cursor-pointer ${active ? ['active-nav-style'] : 'nav-style'}`} 
     onClick={onClick}
 >
-    {/* <span className="mr-2">{icon}</span> */}
-    <img src={icon} alt={`${name} icon`} className="mr-4" />
+    <img src={icon} alt={`${name} icon`} className="mr-4"  
+       
+     />
     <span>{name}</span>
 </li>
 )
@@ -38,13 +41,13 @@ const SideNav: React.FC = () => {
         { name: 'Instructors', icon: '/briefcase.png' },
         { name: 'Learners', icon: '/user.png' },
     ];
-    const[display, setDisplay] = useState(navItems[0])
-    useEffect(()=>{
-        if(!activeItem){
-            dispatch(setButtonDisplay('cohorts'))
+    // const[display, setDisplay] = useState(navItems[0])
+    // useEffect(()=>{
+    //     if(!activeItem){
+    //         dispatch(setButtonDisplay('cohorts'))
             
-        }
-    },[dispatch, activeItem])
+    //     }
+    // },[dispatch, activeItem])
 
     return (
         <nav className="w-72 border-r bg-white flex gap-8 hidden md:block lg:block">

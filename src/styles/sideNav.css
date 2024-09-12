@@ -11,7 +11,13 @@
 .nav-style:first-child{
     margin-top: 35px;
     margin-left: 35%;
+    /* color: #008EEF;
+    background-color: #F6FCFF;
+    border-radius: 20px;
+    font-size: 15.6px;
+    font-weight: 700; */
 }
+
 .active-nav-style{
     color: #008EEF;
     background-color: #F6FCFF;

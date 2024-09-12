@@ -11,13 +11,22 @@ const SideBarMainContent:React.FC = ()=>{
     const activeItem = useSelector((state: RootState) => state.sideNavButton.buttonDisplay);
 
     const dispatch = useDispatch();
-    
+    useEffect(() => {
+        if (activeItem === undefined || activeItem === null) {
+            dispatch(setButtonDisplay('cohorts'));
+        }
+    }, [activeItem, dispatch])
+    // useEffect(() => {
+    //     if (!activeItem) {
+    //         dispatch(setButtonDisplay('cohorts')); 
+    //     }
+    // }, [activeItem]);
   
     const ActiveDisplay = () =>{
         return (
             <>
             {
-                activeItem === 'cohorts' || activeItem === 'cohort'? <Cohorts/> :
+                activeItem === 'cohorts' || activeItem === 'cohort'? <Cohorts /> :
                 activeItem === 'programs'? <Programs/> :
                 activeItem === 'instructors'? <Instructors/>:
                 activeItem === 'learners'? <Learners/>:

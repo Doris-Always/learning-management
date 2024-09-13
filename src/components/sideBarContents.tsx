@@ -16,11 +16,6 @@ const SideBarMainContent:React.FC = ()=>{
             dispatch(setButtonDisplay('cohorts'));
         }
     }, [activeItem, dispatch])
-    // useEffect(() => {
-    //     if (!activeItem) {
-    //         dispatch(setButtonDisplay('cohorts')); 
-    //     }
-    // }, [activeItem]);
   
     const ActiveDisplay = () =>{
         return (

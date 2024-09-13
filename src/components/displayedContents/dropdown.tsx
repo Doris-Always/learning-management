@@ -3,29 +3,31 @@ import React, { useState,useEffect } from 'react';
 import { setButtonDisplay} from '@/ReduxStore/slice/SideNavSlice';
 import { RootState, useAppSelector} from '@/ReduxStore/Store';
 import { useDispatch } from 'react-redux';
-
-
- 
+import BookOpen from '../svgIcon/user';
+import BriefCase from '../svgIcon/briefCase';
+import User from '../svgIcon/user';
+import Users from '../svgIcon/users';
 const CohortDropdown:React.FC = () =>{
     interface DropdownItem {
         name: string;
-        icon: string;
+        icon:  React.ReactElement;
+       
       }
       
       const items: DropdownItem[] = [
-        { name: 'Cohorts', icon: '/users.png' },
-        { name: 'Programs', icon: '/book-open.png' },
-        { name: 'Instructors', icon: '/briefcase.png' },
-        { name: 'Learners', icon: '/user.png' },
+        { name: 'Cohorts', icon: <Users color={'#475661'}/> },
+        { name: 'Programs', icon: <BookOpen color={'#475661'}/> },
+        { name: 'Instructors', icon: <BriefCase color={'#475661'}/> },
+        { name: 'Learners', icon: <User color={'#475661'}/> },
       ];
     
     const dispatch = useDispatch();
-    // const buttonDisplay = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
+   
     const activeItem = useAppSelector((state: RootState) => state.sideNavButton.buttonDisplay);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<DropdownItem>(items[0]);
     useEffect(()=>{
-      // console.log("use effect is working 1"+ items[0].name.toLowerCase())cloudinary
+   
         if(!activeItem){
             dispatch(setButtonDisplay(items[0].name.toLowerCase()))
 
@@ -36,20 +38,13 @@ const CohortDropdown:React.FC = () =>{
           }}
         
       },[dispatch,activeItem])
-      // dispatch,activeItem,selectedItem //this was my dependency but it kept reloading
-      // else {
-        //   const currentItem = items.find(item => item.name.toLowerCase() === activeItem);
-        //   if (currentItem) {
-        //     setSelectedItem(currentItem);
-        //   }}
+     
 
       const handleSelectItem = (item: DropdownItem) => {
         setSelectedItem(item);
         dispatch(setButtonDisplay(item.name.toLowerCase()));
         setIsOpen(false);
-        // console.log("handle select worked now 2")
-        // setSelectedItem(item.name)
-        // setIsOpen(false)
+
       };
 
     return(
@@ -60,14 +55,19 @@ const CohortDropdown:React.FC = () =>{
         onClick={() => setIsOpen(!isOpen)} className="flex items-center justify-between p-2 border bg-white w-full rounded-md shadow-sm ring-1 ring-inset mt-2">
         <span className="flex items-center">
           <>
-          <img
-            src={selectedItem.icon}
-            // src={items.find(item => item.name.toLowerCase() === activeItem)?.icon}
-            alt=""
-            className="w-6 h-6 mr-2"
-          />
-              {selectedItem.name}
-          {/* {items.find(item => item.name.toLowerCase() === activeItem)?.name} */}
+          <div className="mx-2">
+                {React.cloneElement(selectedItem.icon, {
+                color: activeItem === selectedItem.name.toLowerCase() ? '#008EEF' : '#475661',
+                })}
+          </div>
+         
+             <span
+                  className={`font-semibold ${
+                  activeItem === selectedItem.name.toLowerCase() ? 'text-[#008EEF]' : 'text-[#475661]'
+                  }`}>{selectedItem.name}
+              </span>
+           
+          
           </>
          
         </span>
@@ -86,8 +86,18 @@ const CohortDropdown:React.FC = () =>{
               onClick={() => handleSelectItem(item)}
              
             >
-              <img src={item.icon} alt={`${item.name} icon`} className="w-6 h-6 mr-2" />
-              <p>{item.name}</p>
+               <div className="mr-2">
+                    {React.cloneElement(item.icon, {
+                        color: activeItem === item.name.toLowerCase() ? '#008EEF' : '#475661',
+                    })}
+                </div>
+                <span
+                      className={`font-semibold ${
+                      activeItem === item.name.toLowerCase() ? 'text-[#008EEF]' : 'text-[#475661]'
+                      }`}>
+                      {item.name}
+                   </span>
+             
             </li>
           ))}
         </ul>
@@ -98,3 +108,4 @@ const CohortDropdown:React.FC = () =>{
     )
 }
 export default CohortDropdown;
+

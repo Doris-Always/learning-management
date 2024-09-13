@@ -58,6 +58,8 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
       newErrors.endDate = 'End Date is required';
       valid = false;
     }
+   
+  
     // if (!formData.imageFile) {
     //   newErrors.imageFile = 'An image is required';
     //   valid = false;
@@ -119,6 +121,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
       endDate: '',
       imageFile: null,
     });
+    onClose()
   } else {
     console.log("cohort already exist")
     setResponseMessage(result.error || 'cohort exist');
@@ -196,6 +199,7 @@ const CreateCohortModal: React.FC<CreateCohortModalProps> = ({ isOpen, onClose }
                 <input type="date" 
                 placeholder='23 Dec 2021' 
                 name="endDate"
+                min={formData.startDate} 
                 value={formData.endDate}
                 onChange={handleInputChange}
                 className="border-2 rounded-md p-2"/>

@@ -76,6 +76,14 @@ const CreateCohortForm: React.FC<ChildComponentProps> = ({ cancelForm, handleCan
     if (!validateForm()) {
       return; 
     }
+    setFormData({
+      cohortName: '',
+      description: '',
+      programs: '',
+      startDate: '',
+      endDate: '',
+      imageFile: null,
+    });
 
     const { cohortName, description, programs, startDate, endDate } = formData;
     const capitalizedCohortName = cohortName.trim().charAt(0).toUpperCase() + cohortName.trim().slice(1).toLowerCase();
@@ -189,6 +197,7 @@ const CreateCohortForm: React.FC<ChildComponentProps> = ({ cancelForm, handleCan
                   type="date"
                   placeholder='23 Dec 2021'  
                   name="endDate"
+                  min={formData.startDate} 
                   value={formData.endDate}
                   onChange={handleInputChange}
                   className="border-2 rounded-md p-2"
